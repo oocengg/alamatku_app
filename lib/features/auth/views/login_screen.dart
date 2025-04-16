@@ -182,11 +182,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           0,
                         );
-                        Navigator.of(context).pushReplacement(
+
+                        Navigator.of(context).pushAndRemoveUntil(
                           CupertinoPageRoute(
                             builder:
                                 (BuildContext context) => const MenuBarScreen(),
                           ),
+                          (Route<dynamic> route) => false,
                         );
                         // Masih butuh get profil (untuk API)
                       },
