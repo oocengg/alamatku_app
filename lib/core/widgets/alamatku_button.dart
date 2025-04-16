@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Button extends StatelessWidget {
+class AlamatkuButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final Color backgroundColor;
@@ -12,7 +12,7 @@ class Button extends StatelessWidget {
   final double borderRadius;
   final double? iconSize; // Ukuran untuk ikon atau gambar
 
-  const Button({
+  const AlamatkuButton({
     super.key,
     required this.text,
     required this.onPressed,

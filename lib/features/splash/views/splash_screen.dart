@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:alamatku_app/core/constant/app_colors.dart';
-import 'package:alamatku_app/features/menu_bar/views/menu_bar_screen.dart';
+import 'package:alamatku_app/features/auth/views/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     const duration = Duration(seconds: 3);
     return Timer(duration, () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const MenuBarScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     });
   }

@@ -2,7 +2,7 @@ import 'package:alamatku_app/core/constant/app_colors.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 
-class MajadigiTextField extends StatefulWidget {
+class AlamatkuTextField extends StatefulWidget {
   final String placeholder;
   final bool isPassword;
   final TextEditingController? controller;
@@ -12,7 +12,7 @@ class MajadigiTextField extends StatefulWidget {
   final VoidCallback? onSuffixIconTap;
   final bool obscureText;
 
-  const MajadigiTextField({
+  const AlamatkuTextField({
     super.key,
     required this.placeholder,
     this.isPassword = false,
@@ -25,10 +25,10 @@ class MajadigiTextField extends StatefulWidget {
   });
 
   @override
-  State<MajadigiTextField> createState() => _MajadigiTextFieldState();
+  State<AlamatkuTextField> createState() => _AlamatkuTextFieldState();
 }
 
-class _MajadigiTextFieldState extends State<MajadigiTextField> {
+class _AlamatkuTextFieldState extends State<AlamatkuTextField> {
   late bool _isObscured;
 
   @override
