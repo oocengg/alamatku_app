@@ -6,14 +6,10 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  final String nama = "Bro";
-
-  const HomeScreen({
-    super.key,
-  }); // Ganti dengan nama user dari state/provider kalau ada
+  const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -38,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
-                'Halo, ${widget.nama} 👋',
+                'Halo, Bro 👋',
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,

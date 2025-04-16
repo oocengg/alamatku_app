@@ -1,5 +1,6 @@
 import 'package:alamatku_app/core/constant/app_colors.dart';
 import 'package:alamatku_app/core/keys/navigator_key.dart';
+import 'package:alamatku_app/features/address/provider/address_provider.dart';
 import 'package:alamatku_app/features/home/provider/home_provider.dart';
 import 'package:alamatku_app/features/menu_bar/provider/menu_bar_provider.dart';
 import 'package:alamatku_app/features/splash/views/splash_screen.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => MenuBarProvider()),
         ChangeNotifierProvider(create: (context) => HomeProvider()),
+        ChangeNotifierProvider(create: (context) => AddressProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
