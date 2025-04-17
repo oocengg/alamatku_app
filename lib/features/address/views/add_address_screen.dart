@@ -260,11 +260,12 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           );
 
                           Navigator.pop(context);
+                          addressProvider.getAddressData();
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               behavior: SnackBarBehavior.floating,
-                              margin: const EdgeInsets.only(
-                                top: 16,
+                              margin: EdgeInsets.only(
+                                bottom: 100.0,
                                 left: 16,
                                 right: 16,
                               ),
@@ -274,7 +275,16 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                           );
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Add Address failed')),
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              margin: EdgeInsets.only(
+                                bottom: 100.0,
+                                left: 16,
+                                right: 16,
+                              ),
+                              backgroundColor: AppColors.rose500,
+                              content: Text('Add Address failed'),
+                            ),
                           );
                         }
                       }

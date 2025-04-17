@@ -18,8 +18,10 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<AddressProvider>().loadLocationAndAlamat();
-    context.read<AddressProvider>().getAddressData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AddressProvider>().loadLocationAndAlamat();
+      context.read<AddressProvider>().getAddressData();
+    });
   }
 
   @override
@@ -83,6 +85,8 @@ class _AddressScreenState extends State<AddressScreen> {
                               itemBuilder: (context, index) {
                                 final item = addressProvider.addressData[index];
                                 return addressItem(
+                                  context,
+                                  item.addressId ?? 0,
                                   item.addressLabel,
                                   item.name,
                                   item.phoneNumber,

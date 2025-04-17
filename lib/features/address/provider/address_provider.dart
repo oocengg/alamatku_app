@@ -134,6 +134,7 @@ class AddressProvider extends ChangeNotifier {
   // State
   AppState addressState = AppState.loading;
   AppState addAddressState = AppState.initial;
+  AppState deleteAddressState = AppState.initial;
   List<AddressModel> addressData = [];
 
   Future<void> getAddressData() async {
@@ -172,20 +173,6 @@ class AddressProvider extends ChangeNotifier {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String token = preferences.getString("token") ?? '';
 
-    // Print data sebelum dikirim ke API
-    print('Mengirim data ke API:');
-    print('Token: $token');
-    print('Address: $address');
-    print('Address Label: $addressLabel');
-    print('Name: $name');
-    print('Phone: $phone');
-    print('Email: $email');
-    print('Latitude: $lat');
-    print('Longitude: $long');
-    print('Address Map: $addressMap');
-    print('NPWP: $npwp');
-    print('Link NPWP File: $linkNpwp');
-
     try {
       await _addressService.addAddressData(
         token,
@@ -209,5 +196,54 @@ class AddressProvider extends ChangeNotifier {
     } finally {
       notifyListeners();
     }
+  }
+
+  // Delete Address Data
+  Future<void> deleteAddressData(int id) async {
+    deleteAddressState = AppState.loading;
+    notifyListeners();
+
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String token = preferences.getString("token") ?? '';
+
+    try {
+      await _addressService.deleteAddressData(token, id);
+
+      deleteAddressState = AppState.loaded;
+    } catch (e) {
+      deleteAddressState = AppState.failed;
+      rethrow;
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  // Edit Address Data
+  void setAddressDataForEdit({
+    required String label,
+    required String name,
+    required String phone,
+    required String email,
+    required String kotaKecamatan,
+    required String postalCode,
+    required String alamatLengkap,
+    required String pinMap,
+    required double lat,
+    required double long,
+    String? npwp,
+    String? linkNpwp,
+  }) {
+    labelController.text = label;
+    nameController.text = name;
+    phoneController.text = phone;
+    emailController.text = email;
+    kotkecController.text = kotaKecamatan;
+    postalCodeController.text = postalCode;
+    mapDetailController.text = alamatLengkap;
+    mapAddressController.text = pinMap;
+    latMap = lat;
+    longMap = long;
+    npwpController.text = npwp ?? '';
+    npwpFileLink = linkNpwp;
   }
 }

@@ -67,4 +67,16 @@ class AddressService {
       throw Exception(e.toString());
     }
   }
+
+  Future<void> deleteAddressData(String token, int id) async {
+    try {
+      await _apiClient.dio.delete(
+        '/api/blueray/customer/address/delete',
+        data: {"address_id": id},
+        options: Options(headers: {"Authorization": "Token $token"}),
+      );
+    } on DioException catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
