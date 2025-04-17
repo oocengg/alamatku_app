@@ -246,4 +246,49 @@ class AddressProvider extends ChangeNotifier {
     npwpController.text = npwp ?? '';
     npwpFileLink = linkNpwp;
   }
+
+  Future<void> updateAddressData(
+    String id,
+    String address,
+    String addressLabel,
+    String name,
+    String phone,
+    String email,
+    double lat,
+    double long,
+    String addressMap,
+    String npwp,
+    String linkNpwp,
+  ) async {
+    addAddressState = AppState.loading;
+    notifyListeners();
+
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String token = preferences.getString("token") ?? '';
+
+    try {
+      await _addressService.updateAddressData(
+        token,
+        id,
+        address,
+        addressLabel,
+        name,
+        phone,
+        email,
+        lat,
+        long,
+        addressMap,
+        npwp,
+        linkNpwp,
+      );
+
+      addAddressState = AppState.loaded;
+    } catch (e) {
+      print(e.toString());
+      addAddressState = AppState.failed;
+      rethrow;
+    } finally {
+      notifyListeners();
+    }
+  }
 }

@@ -1,6 +1,8 @@
 import 'package:alamatku_app/core/constant/app_colors.dart';
 import 'package:alamatku_app/features/address/provider/address_provider.dart';
+import 'package:alamatku_app/features/address/views/edit_address_screen.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,13 +11,43 @@ Widget addressItem(
   int id,
   String label,
   String name,
-  String telephone,
-  String alamat,
+  String phone,
+  String alamatLengkap,
+  String email,
+  String kotaKecamatan,
+  String postalCode,
+  String pinMap,
+  double lat,
+  double long,
+  String npwp,
+  String linkNpwp,
 ) {
   return GestureDetector(
     onLongPress: () {
       final rootContext = context; // simpan context luar
       _showDeleteConfirmation(rootContext, id);
+    },
+    onTap: () {
+      Navigator.of(context).push(
+        CupertinoPageRoute(
+          builder:
+              (BuildContext context) => EditAddressScreen(
+                id: id.toString(),
+                label: label,
+                name: name,
+                phone: phone,
+                email: email,
+                kotaKecamatan: kotaKecamatan,
+                postalCode: postalCode,
+                alamatLengkap: alamatLengkap,
+                pinMap: pinMap,
+                lat: lat,
+                long: long,
+                npwp: npwp,
+                linkNpwp: linkNpwp,
+              ),
+        ),
+      );
     },
     child: Container(
       margin: EdgeInsets.symmetric(horizontal: 16),
@@ -43,9 +75,9 @@ Widget addressItem(
                 SizedBox(height: 8),
                 _buildItemAlamat(BootstrapIcons.person, name),
                 SizedBox(height: 4),
-                _buildItemAlamat(BootstrapIcons.telephone, telephone),
+                _buildItemAlamat(BootstrapIcons.telephone, phone),
                 SizedBox(height: 4),
-                _buildItemAlamat(BootstrapIcons.map, alamat),
+                _buildItemAlamat(BootstrapIcons.map, alamatLengkap),
               ],
             ),
           ),
