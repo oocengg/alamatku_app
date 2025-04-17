@@ -1,4 +1,6 @@
+import 'package:alamatku_app/core/constant/app_colors.dart';
 import 'package:alamatku_app/core/widgets/alamatku_button.dart';
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -52,7 +54,26 @@ class _AddPinScreenState extends State<AddPinScreen> {
         selectedPosition ?? const LatLng(-6.1754, 106.8272); // Default: Monas
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Pilih Lokasi di Peta')),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            BootstrapIcons.arrow_left_circle,
+            color: AppColors.primary500,
+          ),
+        ),
+        title: const Text(
+          'Pilih Lokasi di Peta',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: AppColors.primary500,
+          ),
+        ),
+        backgroundColor: AppColors.white,
+      ),
       body: Stack(
         children: [
           FlutterMap(
