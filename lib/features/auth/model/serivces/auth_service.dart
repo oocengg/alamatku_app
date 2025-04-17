@@ -17,41 +17,8 @@ class AuthService {
       final res = LoginResponseModel.fromJson(response.data);
 
       return res;
-    } catch (e) {
-      if (e is DioException) {
-        print('DioError: ${e.message}');
-        switch (e.type) {
-          case DioExceptionType.connectionTimeout:
-            print('Connection timeout');
-            break;
-          case DioExceptionType.receiveTimeout:
-            print('Receive timeout');
-            break;
-          case DioExceptionType.sendTimeout:
-            print('Send timeout');
-            break;
-          case DioExceptionType.badResponse:
-            print('Response error status code: ${e.response?.statusCode}');
-            print('Response error status code: ${e.response?.statusCode}');
-            print('Response data: ${e.response?.data}');
-            break;
-          case DioExceptionType.cancel:
-            print('Request cancelled');
-            break;
-          case DioExceptionType.unknown:
-            print('Other error occurred');
-            break;
-          case DioExceptionType.badCertificate:
-            print('Bad Certificate Error');
-            throw UnimplementedError();
-          case DioExceptionType.connectionError:
-            print('Connection Rrror');
-            throw UnimplementedError();
-        }
-      } else {
-        print('Unexpected error $e');
-      }
-      rethrow;
+    } on DioException catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -65,41 +32,8 @@ class AuthService {
       );
 
       print('Response: ${response.data}');
-    } catch (e) {
-      if (e is DioException) {
-        print('DioError: ${e.message}');
-        switch (e.type) {
-          case DioExceptionType.connectionTimeout:
-            print('Connection timeout');
-            break;
-          case DioExceptionType.receiveTimeout:
-            print('Receive timeout');
-            break;
-          case DioExceptionType.sendTimeout:
-            print('Send timeout');
-            break;
-          case DioExceptionType.badResponse:
-            print('Response error status code: ${e.response?.statusCode}');
-            print('Response error status code: ${e.response?.statusCode}');
-            print('Response data: ${e.response?.data}');
-            break;
-          case DioExceptionType.cancel:
-            print('Request cancelled');
-            break;
-          case DioExceptionType.unknown:
-            print('Other error occurred');
-            break;
-          case DioExceptionType.badCertificate:
-            print('Bad Certificate Error');
-            throw UnimplementedError();
-          case DioExceptionType.connectionError:
-            print('Connection Rrror');
-            throw UnimplementedError();
-        }
-      } else {
-        print('Unexpected error $e');
-      }
-      rethrow;
+    } on DioException catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -115,40 +49,8 @@ class AuthService {
       );
 
       return response.data as Map<String, dynamic>;
-    } catch (e) {
-      if (e is DioException) {
-        print('DioError: ${e.message}');
-        switch (e.type) {
-          case DioExceptionType.connectionTimeout:
-            print('Connection timeout');
-            break;
-          case DioExceptionType.receiveTimeout:
-            print('Receive timeout');
-            break;
-          case DioExceptionType.sendTimeout:
-            print('Send timeout');
-            break;
-          case DioExceptionType.badResponse:
-            print('Response error status code: ${e.response?.statusCode}');
-            print('Response data: ${e.response?.data}');
-            break;
-          case DioExceptionType.cancel:
-            print('Request cancelled');
-            break;
-          case DioExceptionType.unknown:
-            print('Other error occurred');
-            break;
-          case DioExceptionType.badCertificate:
-            print('Bad Certificate Error');
-            throw UnimplementedError();
-          case DioExceptionType.connectionError:
-            print('Connection Error');
-            throw UnimplementedError();
-        }
-      } else {
-        print('Unexpected error $e');
-      }
-      rethrow;
+    } on DioException catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -171,40 +73,8 @@ class AuthService {
       );
 
       return response.data as Map<String, dynamic>;
-    } catch (e) {
-      if (e is DioException) {
-        print('DioError: ${e.message}');
-        switch (e.type) {
-          case DioExceptionType.connectionTimeout:
-            print('Connection timeout');
-            break;
-          case DioExceptionType.receiveTimeout:
-            print('Receive timeout');
-            break;
-          case DioExceptionType.sendTimeout:
-            print('Send timeout');
-            break;
-          case DioExceptionType.badResponse:
-            print('Response error status code: ${e.response?.statusCode}');
-            print('Response data: ${e.response?.data}');
-            break;
-          case DioExceptionType.cancel:
-            print('Request cancelled');
-            break;
-          case DioExceptionType.unknown:
-            print('Other error occurred');
-            break;
-          case DioExceptionType.badCertificate:
-            print('Bad Certificate Error');
-            throw UnimplementedError();
-          case DioExceptionType.connectionError:
-            print('Connection Error');
-            throw UnimplementedError();
-        }
-      } else {
-        print('Unexpected error $e');
-      }
-      rethrow;
+    } on DioException catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

@@ -23,6 +23,9 @@ class AddressProvider extends ChangeNotifier {
   final mapAddressController = TextEditingController();
   final npwpController = TextEditingController();
 
+  double? latMap;
+  double? longMap;
+
   // Location
   Position? currentPosition;
   double? lat;
@@ -65,6 +68,8 @@ class AddressProvider extends ChangeNotifier {
       final res = await http.get(url);
       final data = json.decode(res.body);
       mapAddressController.text = data['display_name'] ?? '';
+      latMap = lat;
+      longMap = long;
     } catch (e) {
       debugPrint('Error reverse geocoding: $e');
     }
@@ -98,21 +103,6 @@ class AddressProvider extends ChangeNotifier {
     }
   }
 
-  // Submit Address (dummy logic)
-  void submitAddress() {
-    debugPrint('Label: ${labelController.text}');
-    debugPrint('Name: ${nameController.text}');
-    debugPrint('Phone: ${phoneController.text}');
-    debugPrint('Email: ${emailController.text}');
-    debugPrint('Province: $selectedProvince');
-    debugPrint('District: $selectedDistrict');
-    debugPrint('Sub-district: $selectedSubDistrict');
-    debugPrint('Postal code: ${postalCodeController.text}');
-    debugPrint('Map address: ${mapAddressController.text}');
-    debugPrint('NPWP link: $npwpFileLink');
-    // Implement API POST here...
-  }
-
   @override
   void dispose() {
     labelController.dispose();
@@ -125,11 +115,25 @@ class AddressProvider extends ChangeNotifier {
     super.dispose();
   }
 
+  void clearControllers() {
+    labelController.clear();
+    nameController.clear();
+    phoneController.clear();
+    emailController.clear();
+    kotkecController.clear();
+    postalCodeController.clear();
+    mapDetailController.clear();
+    mapAddressController.clear();
+    npwpController.clear();
+    npwpFileLink = null;
+  }
+
   // API Intg
   final AddressService _addressService = AddressService();
 
   // State
   AppState addressState = AppState.loading;
+  AppState addAddressState = AppState.initial;
   List<AddressModel> addressData = [];
 
   Future<void> getAddressData() async {
@@ -146,6 +150,63 @@ class AddressProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       addressState = AppState.failed;
+      notifyListeners();
+    }
+  }
+
+  Future<void> addAddressData(
+    String address,
+    String addressLabel,
+    String name,
+    String phone,
+    String email,
+    double lat,
+    double long,
+    String addressMap,
+    String npwp,
+    String linkNpwp,
+  ) async {
+    addAddressState = AppState.loading;
+    notifyListeners();
+
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String token = preferences.getString("token") ?? '';
+
+    // Print data sebelum dikirim ke API
+    print('Mengirim data ke API:');
+    print('Token: $token');
+    print('Address: $address');
+    print('Address Label: $addressLabel');
+    print('Name: $name');
+    print('Phone: $phone');
+    print('Email: $email');
+    print('Latitude: $lat');
+    print('Longitude: $long');
+    print('Address Map: $addressMap');
+    print('NPWP: $npwp');
+    print('Link NPWP File: $linkNpwp');
+
+    try {
+      await _addressService.addAddressData(
+        token,
+        address,
+        addressLabel,
+        name,
+        phone,
+        email,
+        lat,
+        long,
+        addressMap,
+        npwp,
+        linkNpwp,
+      );
+
+      addAddressState = AppState.loaded;
+    } catch (e) {
+      print(e.toString());
+      addAddressState = AppState.failed;
+      rethrow;
+    } finally {
       notifyListeners();
     }
   }

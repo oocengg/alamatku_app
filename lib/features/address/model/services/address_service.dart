@@ -28,4 +28,43 @@ class AddressService {
       throw Exception(e.toString());
     }
   }
+
+  Future<void> addAddressData(
+    String token,
+    String address,
+    String addressLabel,
+    String name,
+    String phone,
+    String email,
+    double lat,
+    double long,
+    String addressMap,
+    String npwp,
+    String linkNpwp,
+  ) async {
+    try {
+      await _apiClient.dio.post(
+        '/api/blueray/customer/address',
+        data: {
+          "address": address,
+          "address_label": addressLabel,
+          "name": name,
+          "phone_number": phone,
+          "email": email,
+          "province_id": 1,
+          "district_id": 1,
+          "sub_district_id": 1,
+          "postal_code": "000000",
+          "lat": lat,
+          "long": long,
+          "address_map": addressMap,
+          "npwp": npwp,
+          "npwp_file": linkNpwp,
+        },
+        options: Options(headers: {"Authorization": "Token $token"}),
+      );
+    } on DioException catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

@@ -85,7 +85,7 @@ class _AddPinScreenState extends State<AddPinScreen> {
             children: [
               TileLayer(
                 urlTemplate:
-                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    'http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga',
                 subdomains: const ['a', 'b', 'c'],
               ),
               if (selectedPosition != null)

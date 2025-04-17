@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               TileLayer(
                                 urlTemplate:
-                                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                    "http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga",
                                 subdomains: ['a', 'b', 'c'],
                               ),
                               MarkerLayer(
