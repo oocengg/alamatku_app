@@ -1,6 +1,8 @@
 import 'package:alamatku_app/core/constant/app_colors.dart';
 import 'package:alamatku_app/core/widgets/alamatku_button.dart';
+import 'package:alamatku_app/features/auth/views/login_screen.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -77,7 +79,14 @@ class ProfileScreen extends StatelessWidget {
 
               AlamatkuButton(
                 text: 'Keluar',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                    CupertinoPageRoute(
+                      builder: (BuildContext context) => const LoginScreen(),
+                    ),
+                    (Route<dynamic> route) => false,
+                  );
+                },
                 backgroundColor: AppColors.rose500,
               ),
               const SizedBox(height: 10),
