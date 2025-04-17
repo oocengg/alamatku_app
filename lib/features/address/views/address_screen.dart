@@ -1,6 +1,8 @@
 import 'package:alamatku_app/core/constant/app_colors.dart';
 import 'package:alamatku_app/features/address/provider/address_provider.dart';
+import 'package:alamatku_app/features/address/views/add_address_screen.dart';
 import 'package:alamatku_app/features/address/widgets/item_widget/address_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +22,7 @@ class _AddressScreenState extends State<AddressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AddressProvider>(context);
-    final daftarAlamat = provider.daftarAlamat;
+    List daftarAlamat = ['aaa'];
 
     return Scaffold(
       body: SafeArea(
@@ -44,7 +45,15 @@ class _AddressScreenState extends State<AddressScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        CupertinoPageRoute(
+                          builder:
+                              (BuildContext context) =>
+                                  const AddAddressScreen(),
+                        ),
+                      );
+                    },
                     icon: Icon(
                       Icons.add_location_alt_rounded,
                       color: AppColors.primary500,
@@ -63,7 +72,7 @@ class _AddressScreenState extends State<AddressScreen> {
                         separatorBuilder: (context, index) {
                           return SizedBox(height: 8);
                         },
-                        itemCount: daftarAlamat.length,
+                        itemCount: 3,
                         itemBuilder: (context, index) {
                           // final item = daftarAlamat[index];
                           return addressItem();

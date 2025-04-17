@@ -47,9 +47,19 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to show it on the map</string>
-
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>We need your location to show it on the map</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App membutuhkan akses ke galeri untuk mengunggah file NPWP</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App membutuhkan akses ke kamera untuk mengambil foto NPWP</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App membutuhkan akses ke mikrofon (jika diperlukan)</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+
 
 	<!-- Optional jika butuh background location -->
 	<key>UIBackgroundModes</key>
