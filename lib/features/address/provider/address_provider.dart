@@ -77,29 +77,28 @@ class AddressProvider extends ChangeNotifier {
 
   // Upload NPWP
   Future<void> pickNpwpFile() async {
-    final result = await FilePicker.platform.pickFiles(type: FileType.any);
-    if (result != null && result.files.single.path != null) {
-      npwpFile = File(result.files.single.path!);
-      await uploadNpwpFile(npwpFile!);
-    }
-  }
-
-  Future<void> uploadNpwpFile(File file) async {
     try {
-      final request = http.MultipartRequest(
-        'POST',
-        Uri.parse('https://api.example.com/upload'),
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
       );
-      request.files.add(
-        await http.MultipartFile.fromPath('npwp_file', file.path),
-      );
-      final response = await request.send();
-      final resBody = await response.stream.bytesToString();
-      final data = json.decode(resBody);
-      npwpFileLink = data['file_url'];
-      notifyListeners();
+
+      if (result != null && result.files.single.path != null) {
+        final filePath = result.files.single.path!;
+        final file = File(filePath);
+
+        npwpFile = file;
+
+        final uploadedUrl = await _addressService.uploadNpwpFileDio(file);
+
+        if (uploadedUrl != null) {
+          npwpFileLink = uploadedUrl;
+          notifyListeners();
+        }
+      }
     } catch (e) {
-      debugPrint('Upload NPWP error: $e');
+      debugPrint('Gagal memilih/mengunggah file NPWP: $e');
+      // Tambahkan handler UI jika perlu
     }
   }
 

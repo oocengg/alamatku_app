@@ -256,7 +256,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                             addressProvider.longMap ?? 0,
                             addressProvider.mapAddressController.text,
                             addressProvider.npwpController.text,
-                            addressProvider.npwpController.text,
+                            addressProvider.npwpFileLink ?? '',
                           );
 
                           Navigator.pop(context);

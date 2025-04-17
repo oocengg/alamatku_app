@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:alamatku_app/core/services/api_client.dart';
 import 'package:alamatku_app/features/address/model/models/address_model.dart';
 import 'package:dio/dio.dart';
@@ -117,6 +119,36 @@ class AddressService {
       );
     } on DioException catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  Future<String?> uploadNpwpFileDio(File file) async {
+    try {
+      final fileName = file.path.split('/').last;
+
+      final formData = FormData.fromMap({
+        'file_data': await MultipartFile.fromFile(
+          file.path,
+          filename: fileName,
+        ),
+      });
+
+      final response = await _apiClient.dio.post(
+        '/api/blueray/file/upload',
+        data: formData,
+      );
+
+      final data = response.data;
+
+      if (data['action'] == true && data['file_url'] != null) {
+        return data['file_url'];
+      } else {
+        throw Exception('Upload gagal: ${data['message'] ?? 'Unknown error'}');
+      }
+    } on DioException catch (e) {
+      throw Exception('Upload gagal: ${e.message}');
+    } catch (e) {
+      throw Exception('Upload gagal');
     }
   }
 }

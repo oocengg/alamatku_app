@@ -61,6 +61,8 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         pinMap: widget.pinMap,
         lat: widget.lat,
         long: widget.long,
+        npwp: widget.npwp,
+        linkNpwp: widget.linkNpwp,
       );
     });
   }
@@ -295,7 +297,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                             addressProvider.longMap ?? 0,
                             addressProvider.mapAddressController.text,
                             addressProvider.npwpController.text,
-                            addressProvider.npwpController.text,
+                            addressProvider.npwpFileLink ?? '',
                           );
 
                           Navigator.pop(context);

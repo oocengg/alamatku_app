@@ -69,27 +69,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const Divider(),
                   const SizedBox(height: 10),
 
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.dark100),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          BootstrapIcons.pin_map_fill,
-                          size: 16,
-                          color: AppColors.rose500,
-                        ),
-                        SizedBox(width: 8),
-                        Expanded(child: Text('Total Data Alamatku')),
-                        Text('20'),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-
                   profileProvider.logoutState == AppState.loading
                       ? Center(child: const CircularProgressIndicator())
                       : AlamatkuButton(

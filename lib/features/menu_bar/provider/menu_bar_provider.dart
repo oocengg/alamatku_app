@@ -1,7 +1,6 @@
 // import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:alamatku_app/core/state/app_state.dart';
 import 'package:alamatku_app/features/address/views/address_screen.dart';
-import 'package:alamatku_app/features/home/views/home_screen.dart';
 import 'package:alamatku_app/features/profile/views/profile_screen.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,25 +24,16 @@ class MenuBarProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  final List icon = [
-    BootstrapIcons.house,
-    BootstrapIcons.pin_map,
-    BootstrapIcons.person,
-  ];
+  final List icon = [BootstrapIcons.pin_map, BootstrapIcons.person];
 
   final List iconActive = [
-    BootstrapIcons.house_fill,
     BootstrapIcons.pin_map_fill,
     BootstrapIcons.person_fill,
   ];
 
   // Title buat Icon Diatas
-  final List<String> title = ['Beranda', 'Alamatku', 'Akun'];
+  final List<String> title = ['Alamatku', 'Akun'];
 
   // Pages untuk icon icon diatas
-  final List<Widget> pages = [
-    const HomeScreen(),
-    const AddressScreen(),
-    const ProfileScreen(),
-  ];
+  final List<Widget> pages = [const AddressScreen(), const ProfileScreen()];
 }
