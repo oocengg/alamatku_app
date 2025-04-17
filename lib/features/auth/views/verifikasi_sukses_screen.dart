@@ -135,6 +135,7 @@ class _VerifikasiSuksesScreenState extends State<VerifikasiSuksesScreen> {
                           AlamatkuTextField(
                             placeholder: 'Password',
                             isPassword: true,
+                            obscureText: true,
                             controller: authRegisterProvider.passwordController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {

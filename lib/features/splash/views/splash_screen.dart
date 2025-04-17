@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:alamatku_app/core/constant/app_colors.dart';
 import 'package:alamatku_app/features/auth/views/login_screen.dart';
+import 'package:alamatku_app/features/menu_bar/views/menu_bar_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,14 +19,17 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     startSplashScreen();
-    // _buildPage();
+    _buildPage();
   }
 
   startSplashScreen() async {
     const duration = Duration(seconds: 3);
     return Timer(duration, () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        MaterialPageRoute(
+          builder:
+              (context) => isLoggedIn ? const MenuBarScreen() : LoginScreen(),
+        ),
       );
     });
   }
@@ -44,30 +49,23 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  // _buildPage() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   if (prefs.getKeys().isNotEmpty) {
-  //     if (prefs.getBool('isLoggedIn')!) {
-  //       if (!JwtDecoder.isExpired(prefs.getString('jwt_token')!)) {
-  //         setState(() {
-  //           isLoggedIn = true;
-  //         });
-  //       } else {
-  //         setState(() {
-  //           prefs.setBool("isLoggedIn", false);
-  //           prefs.remove("token");
-  //           isLoggedIn = false;
-  //         });
-  //       }
-  //     } else {
-  //       setState(() {
-  //         isLoggedIn = false;
-  //       });
-  //     }
-  //   } else {
-  //     setState(() {
-  //       isLoggedIn = false;
-  //     });
-  //   }
-  // }
+  _buildPage() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    if (preferences.getKeys().isNotEmpty) {
+      if (preferences.getBool('isLoggedIn')!) {
+        setState(() {
+          isLoggedIn = true;
+        });
+      } else {
+        setState(() {
+          isLoggedIn = false;
+        });
+      }
+    } else {
+      setState(() {
+        isLoggedIn = false;
+      });
+    }
+  }
 }

@@ -1,9 +1,11 @@
 import 'package:alamatku_app/core/constant/app_colors.dart';
 import 'package:alamatku_app/core/keys/navigator_key.dart';
 import 'package:alamatku_app/features/address/provider/address_provider.dart';
+import 'package:alamatku_app/features/auth/provider/auth_login_provider.dart';
 import 'package:alamatku_app/features/auth/provider/auth_register_provider.dart';
 import 'package:alamatku_app/features/home/provider/home_provider.dart';
 import 'package:alamatku_app/features/menu_bar/provider/menu_bar_provider.dart';
+import 'package:alamatku_app/features/profile/provider/profile_provider.dart';
 import 'package:alamatku_app/features/splash/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HomeProvider()),
         ChangeNotifierProvider(create: (context) => AddressProvider()),
         ChangeNotifierProvider(create: (context) => AuthRegisterProvider()),
+        ChangeNotifierProvider(create: (context) => AuthLoginProvider()),
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
