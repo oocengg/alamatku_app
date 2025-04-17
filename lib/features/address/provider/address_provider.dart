@@ -2,10 +2,14 @@ import 'dart:io';
 import 'dart:convert';
 
 import 'package:alamatku_app/core/services/location_services.dart';
+import 'package:alamatku_app/core/state/app_state.dart';
+import 'package:alamatku_app/features/address/model/models/address_model.dart';
+import 'package:alamatku_app/features/address/model/services/address_service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddressProvider extends ChangeNotifier {
   // Controllers
@@ -119,5 +123,30 @@ class AddressProvider extends ChangeNotifier {
     mapAddressController.dispose();
     npwpController.dispose();
     super.dispose();
+  }
+
+  // API Intg
+  final AddressService _addressService = AddressService();
+
+  // State
+  AppState addressState = AppState.loading;
+  List<AddressModel> addressData = [];
+
+  Future<void> getAddressData() async {
+    addressState = AppState.loading;
+    notifyListeners();
+
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String token = preferences.getString("token") ?? '';
+
+    try {
+      addressData = await _addressService.getAddressData(token);
+
+      addressState = AppState.loaded;
+      notifyListeners();
+    } catch (e) {
+      addressState = AppState.failed;
+      notifyListeners();
+    }
   }
 }

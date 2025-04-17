@@ -2,7 +2,7 @@ import 'package:alamatku_app/core/constant/app_colors.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 
-Widget addressItem() {
+Widget addressItem(String label, String name, String telephone, String alamat) {
   return Container(
     margin: EdgeInsets.symmetric(horizontal: 16),
     padding: EdgeInsets.all(16),
@@ -18,7 +18,7 @@ Widget addressItem() {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Rumah',
+                label,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -27,14 +27,11 @@ Widget addressItem() {
                 maxLines: 2,
               ),
               SizedBox(height: 8),
-              _buildItemAlamat(BootstrapIcons.person, 'Fauzi'),
+              _buildItemAlamat(BootstrapIcons.person, name),
               SizedBox(height: 4),
-              _buildItemAlamat(BootstrapIcons.telephone, '01234567'),
+              _buildItemAlamat(BootstrapIcons.telephone, telephone),
               SizedBox(height: 4),
-              _buildItemAlamat(
-                BootstrapIcons.map,
-                'Jl. SomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomething',
-              ),
+              _buildItemAlamat(BootstrapIcons.map, alamat),
             ],
           ),
         ),
